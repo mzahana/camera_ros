@@ -114,6 +114,9 @@ namespace libcamera_ros
 
       std::string frame_id_;
 
+      // timestamp offset (ns) from camera time to system time
+      int64_t time_offset_ = 0;
+
       struct buffer_info_t
       {
         void *data;
@@ -543,9 +546,13 @@ namespace libcamera_ros
       for (const libcamera::FrameMetadata::Plane &plane : metadata.planes())
         bytesused += plane.bytesused;
 
+      // Set time offset once for accurate timing using the device time
+      if (time_offset_ == 0)
+        time_offset_ = ros::Time::now().toNSec() - metadata.timestamp;
+
       // send image data
       std_msgs::Header hdr;
-      hdr.stamp = ros::Time().fromNSec(metadata.timestamp);
+      hdr.stamp = ros::Time().fromNSec(time_offset_ + int64_t(metadata.timestamp)); //ros::Time().fromNSec(metadata.timestamp);
       hdr.frame_id = frame_id_;
       const libcamera::StreamConfiguration &cfg = stream_->configuration();
 
