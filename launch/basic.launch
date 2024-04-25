@@ -6,8 +6,8 @@
   <arg name="pixel_format" default="RGB888"/>
   <arg name="frame_id" default="libcamera_frame"/>
   <arg name="calib_url" default="file://$(find libcamera_ros)/config/calib/libcamera.yaml"/>
-  <arg name="resolution_width" default="1456"/>
-  <arg name="resolution_height" default="1088"/>
+  <arg name="resolution_width" default="1280"/>
+  <arg name="resolution_height" default="400"/>
 
   <!-- will it run using GNU debugger? -->
   <arg name="DEBUG" default="false" />
