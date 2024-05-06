@@ -552,7 +552,7 @@ namespace libcamera_ros
 
       // send image data
       std_msgs::Header hdr;
-      hdr.stamp = ros::Time().fromNSec(time_offset_ + int64_t(metadata.timestamp)); //ros::Time().fromNSec(metadata.timestamp);
+      hdr.stamp = ros::Time::now(); //ros::Time().fromNSec(time_offset_ + int64_t(metadata.timestamp)); //ros::Time().fromNSec(metadata.timestamp);
       hdr.frame_id = frame_id_;
       const libcamera::StreamConfiguration &cfg = stream_->configuration();
 
