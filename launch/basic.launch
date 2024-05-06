@@ -28,7 +28,8 @@
   <env name="LIBCAMERA_IPA_CONFIG_PATH" value="$(optenv LIBCAMERA_IPA_CONFIG_PATH /opt/ros/noetic/share/libcamera/ipa)" />
   <env if="$(arg DEBUG)" name="LIBCAMERA_LOG_LEVELS" value="$(optenv LIBCAMERA_LOG_LEVELS *:DEBUG)" />
 
-  <node pkg="nodelet" type="nodelet" name="libcamera_ros" args="$(arg nodelet) libcamera_ros/LibcameraRos $(arg nodelet_manager)" launch-prefix="$(arg launch_prefix_debug)" output="screen">
+  <arg name="required" default="true"/>
+  <node pkg="nodelet" type="nodelet" name="libcamera_ros" args="$(arg nodelet) libcamera_ros/LibcameraRos $(arg nodelet_manager)" launch-prefix="$(arg launch_prefix_debug)" output="screen" required="$(arg required)">
 
     <param name="camera_name" type="string" value="$(arg camera_name)"/>
     <param name="camera_id" type="int" value="$(arg camera_id)"/>
